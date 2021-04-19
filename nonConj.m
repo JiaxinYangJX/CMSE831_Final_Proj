@@ -27,7 +27,7 @@ end
 
 % update
 m     = m + t * dire_conj_next;
-error = norm(lr * dire_conj_next) / norm(m);
+error = norm(t * dire_conj_next) / norm(m);
 i = 0;
 
 while (error > epsilon) && (i<1000)
