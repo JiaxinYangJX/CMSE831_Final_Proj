@@ -12,23 +12,12 @@ for i = 1:N
         end
     end
 end
-f= sin(5*x).^2*ones(1,N)+ones(N,1)*cos(5*x)'.^2+1;
+
+%f= sin(5*x).^2*ones(1,N)+ones(N,1)*cos(5*x)'.^2+1;
 M = length(transducer);
-load forward_iter1000.mat time
+load forward_f1.mat time
 
 m=ones(N^2,1);
 
-for i=1:1000
-    G=matrix(m,N,transducer);
-    
-    % what to do
-    m = ridge(time,G,0.1);
-    
-    figure(1)
-    imagesc(reshape(1./m,N,N))
-    title(i);
-    colorbar;
-    pause(0.01)
-    
-end
+m = nonConj(time,m,N,transducer,0.1);
 

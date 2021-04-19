@@ -11,6 +11,7 @@ for t=1:1000
             else
                 a = min(u(i+1,j),u(i-1,j));
             end
+            
             if j == 1
                 b = u(i,2);
             elseif j==N
@@ -18,6 +19,7 @@ for t=1:1000
             else
                 b = min(u(i,j+1),u(i,j-1));
             end
+            
             if abs(a-b)>=f(i,j)*h
                 unew(i,j) = min(a,b)+f(i,j)*h;
             else
@@ -27,11 +29,11 @@ for t=1:1000
     end
     u=min(unew,u);
     u(transducer)=0;
-%     if mod(t,1000) == 0
-%         imagesc(u)
-%         title(t)
-%         colorbar;
-%         pause(0.01)
-%     end
+%    if mod(t,1000) == 0
+%        imagesc(u)
+%        title(t)
+%        colorbar;
+%        pause(0.01)
+%    end
 end
 end
