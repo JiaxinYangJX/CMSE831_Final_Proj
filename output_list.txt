@@ -1,0 +1,4 @@
+output1: L2 for circle speed
+output2: L2 for sparse representation
+output3: L2+sparse for sparse representation
+output4: L2 for sin cos speed
