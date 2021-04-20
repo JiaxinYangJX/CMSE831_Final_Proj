@@ -1,5 +1,6 @@
 function m = nonConj(time,m,N,transducer,epsilon)
 % solve G(m)*m = d based on non conjugate method
+error_list = [];
 
 % initailize
 alpha = 0.3;
@@ -37,6 +38,7 @@ end
 % update
 m     = new_m;
 error = cost_t
+error_list = [error_list; error];
 
 % plot
 figure(1)
@@ -44,6 +46,9 @@ imagesc(reshape(m,N,N))
 title(['Iteration = ', num2str(i), ' Learning rate is ',num2str(t), ' Error is ',num2str(error)]);
 colorbar;
 pause(0.01)
+
+% save
+save('JY_f1.mat','m','error_list');
 
 while i<1000
     i = i + 1
@@ -85,7 +90,7 @@ while i<1000
     % update
     m     = new_m;
     error = cost_t
-    
+    error_list = [error_list; error];
     % plot
     figure(1)
     imagesc(reshape(m,N,N))
@@ -93,6 +98,8 @@ while i<1000
     colorbar;
     pause(0.01)
     
+    %save
+    save('JY_f1.mat','m','error_list');
 end
 
 end
