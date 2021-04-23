@@ -17,9 +17,11 @@ M = length(transducer);
 %% load one specific forward problem
 load forward_f1.mat time
 % load forward_sin.mat time
+% load forward_poly.mat time
 
 m = 0.8*ones(N^2,1);
 % m = 2*ones(N^2,1);
+% m = 3*ones(N^2,1);
 
 m = nonConj(time,m,N,transducer);
 
