@@ -12,25 +12,15 @@ for i = 1:N
         end
     end
 end
-
-f = ones(N,N);
-for i = 1:N
-    for j = 1:N
-        if (i-N/2)^2 + (j-N/2)^2 < 5000/4
-            f(i,j)=1/2;
-        end
-    end
-end
-
-
-%f= sin(5*x).^2*ones(1,N)+ones(N,1)*cos(5*x)'.^2+1;
 M = length(transducer);
+
+%% load one specific forward problem
 load forward_f1.mat time
+% load forward_sin.mat time
 
-m=0.8*ones(N^2,1);
+m = 0.8*ones(N^2,1);
+% m = 2*ones(N^2,1);
 
-m = nonConj(time,m,N,transducer,0.1);
+m = nonConj(time,m,N,transducer);
 
-% rmse
-sqrt(sum(sum(f-m)).^2)
 

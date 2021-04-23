@@ -13,15 +13,13 @@ for i = 1:N
     end
 end
 
-
-
-%f= sin(5*x).^2*ones(1,N)+ones(N,1)*cos(5*x)'.^2+1;
 M = length(transducer);
-load forward_sparse.mat time
 
-[X,Y] = meshgrid(x,x);
+load forward_poly.mat time
 
 % calculate psi
+[X,Y] = meshgrid(x,x);
+
 psi = zeros(N^2, 6);
 psi(:,1) = ones(N^2,1);
 psi(:,2) = reshape(X,[],1);
@@ -32,10 +30,9 @@ psi(:,6) = reshape(Y.^2,[],1);
 
 [psi,~] = qr(psi,0);
 
-m=3*ones(N^2,1);
+m = 3*ones(N^2,1);
 
+% different sparse algorithms
 m = nonConj_sparse(time,m,N,transducer,psi,0.1);
-
-% rmse
-sqrt(sum(sum(f-m)).^2)
+m = nonConj_sparse_new(time,m,N,transducer,psi,0.1);
 

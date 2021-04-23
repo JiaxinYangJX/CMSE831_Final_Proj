@@ -1,6 +1,7 @@
 function m = nonConj_sparse(time,m,N,transducer,psi,lambda)
 % solve G(m)*m = d based on non conjugate method
 error_list = [];
+error_change = 100;
 epsilon = 0.1;
 % initailize
 alpha = 0.3;
@@ -44,14 +45,14 @@ error_list = [error_list; error];
 % plot
 figure(1)
 imagesc(reshape(m,N,N))
-title(['Iteration = ', num2str(i), ' Learning rate is ',num2str(t), ' Error is ',num2str(error)]);
+title(['Iteration = ', num2str(i), ' Learning rate is ',num2str(t), ' Loss is ',num2str(error)]);
 colorbar;
 pause(0.01)
 
 % save
-save('JY_sparse_con.mat','m','error_list');
+save('out_sparse.mat','m','error_list');
 
-while i<1000
+while (i < 1000) && (error_change > 0.1)
     i = i + 1
     dire_conj_prev = dire_conj_next;
     grad_prev      = grad_next;
@@ -94,15 +95,16 @@ while i<1000
     m     = new_m;
     error = cost_t
     error_list = [error_list; error];
+    error_change = error - error_list(i-1);
     % plot
     figure(1)
     imagesc(reshape(m,N,N))
-    title(['Iteration = ', num2str(i), ' Learning rate is ',num2str(t), ' Error is ',num2str(error)]);
+    title(['Iteration = ', num2str(i), ' Learning rate is ',num2str(t), ' Loss is ',num2str(error)]);
     colorbar;
     pause(0.01)
     
     %save
-    save('JY_sparse_con.mat','m','error_list');
+    save('out_sparse.mat','m','error_list');
 end
 
 end
